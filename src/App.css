@@ -70,13 +70,26 @@ button:hover {
   border: 1px solid #888;
   width: 80%;
 }
+.modal-footer {
+  height: 30px;
+  background-color: #fefefe;
+}
+
+.floated-right {
+  float: right;
+  margin-left: 12px;
+  margin-bottom: 8px;
+}
 
 /* The Close Button */
 .close {
+  margin-top: -24px;
+  margin-right: -20px;
   color: #aaaaaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
+  transition: 0.4s;
 }
 
 .close:hover,
@@ -90,7 +103,12 @@ button:hover {
   padding: 12px;
   background-color: #343A40;
   width: 100vw;
-  height: 30px;
+  height: 36px;
+}
+
+.links-holder {
+  position: absolute;
+  margin: 8px 0px;
 }
 
 .links {
@@ -100,5 +118,5 @@ button:hover {
 
 .navigation-button {
   float: right;
-  margin-right: 16px; 
+  margin-right: 24px; 
 }

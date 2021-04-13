@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import qs from 'qs';
 
 import { useStore } from '../store';
 import DefaultInput from './DefaultInput';
@@ -13,10 +12,8 @@ const NavigationBar = (props) => {
   const history = useHistory();
   const reset = useStore(state => state.reset);
   const defaultDuration = useStore(state => state.duration);
+  const durationLabel = useStore(state => state.durationLabel);
   const setTimes = useStore(state => state.setTimes);
-  const parsedQuery = qs.parse(location.search, {
-    ignoreQueryPrefix: true
-  });
 
   const onSave = (val) => {
     setShowModal(false);
@@ -26,50 +23,38 @@ const NavigationBar = (props) => {
       duration,
     } = calculateDurationsFromInput(val);
     const durationLabel = 'DEFAULT';
-    const newQuery = {
-      ...parsedQuery,
-      duration,
-      startTime,
-      endTime,
-      durationLabel,
-    };
     setTimes(duration, startTime, endTime, durationLabel, 'INPUT');
-    history.push({
-      ...location,
-      search: qs.stringify(newQuery),
-    });
   };
-
+  const onReset = () => {
+    reset();
+    history.push('/');
+  };
   const onCancel = () => setShowModal(false);
   const onClickShowModal = () => setShowModal(true);
 
   return (
     <div className={'navigation-background'}>
-      {links.map(link => {
-        let currentLink = false;
-        if (location.pathname === link.to) {
-          currentLink = true;
-        }
-        return (
-          <React.Fragment key={link.to}>
-            {
-              currentLink
-                ? <span className={'links'}>{link.name}</span>
-                : <Link to={link.to} className={'links'}>{link.name}</Link>
-            }
-          </React.Fragment>
-          
-        );
-      })}
+      <span className={'links-holder'}>
+        {links.map(link => {
+          let currentLink = false;
+          if (location.pathname === link.to) {
+            currentLink = true;
+          }
+          return (
+            <span key={link.to}>
+              {
+                currentLink
+                  ? <span className={'links'}>{link.name}</span>
+                  : <Link to={link.to} className={'links'}>{link.name}</Link>
+              }
+            </span>
+            
+          );
+        })}
+      </span>
       {showModal && <DefaultInput onSave={onSave} onCancel={onCancel} defaultValue={defaultDuration} />}
-
-      <button onClick={() => {
-        reset();
-        history.push('/');
-      }}
-      className={'navigation-button'}
-      >Reset</button>
-      <button onClick={onClickShowModal} className={'navigation-button'}>Set Default</button>
+      <button onClick={onReset} className={'navigation-button button2'}>Reset</button>
+      {durationLabel === 'DEFAULT' && <button onClick={onClickShowModal} className={'navigation-button button4'}>Set Default</button>}
     </div>
   );
 }

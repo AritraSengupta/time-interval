@@ -1,10 +1,13 @@
 import { Title, List } from '../components';
 
-const ScreenB = () => {
-  return <div>
-    <Title title={'Screen A'} />
-    <List />
-  </div>
+const ScreenB = (props) => {
+  const { title } = props;
+  return (
+    <div>
+      <Title title={title} />
+      <List />
+    </div>
+  );
 };
 
 export default ScreenB;

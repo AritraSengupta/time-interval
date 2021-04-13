@@ -1,6 +1,7 @@
-const calculateParams = (duration) => {
+const calculateParams = (val) => {
+  const duration = Number(val);
   const endTime = Date.now();
-  const durationInMs = Number(duration) * 60 * 1000; // duration in ms
+  const durationInMs = duration * 60 * 1000; // duration in ms
   const startTime = endTime - durationInMs;
 
   return {
