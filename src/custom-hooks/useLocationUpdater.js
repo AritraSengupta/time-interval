@@ -23,11 +23,12 @@ function useLocationUpdater() {
   });
   const prevPath = usePrevious(location.pathname);
   const prevEndTime = usePrevious(endTime);
-  // const values = calculateDurationsFromUrl(parsedQuery, duration, durationLabel);
 
+  // Handle the case where user inputs a custom value
+  // All the necessary values have already been calculated
+  // Just fetch from store and update the url
   useEffect(() => {
     if (prevPath === location.pathname && userActivityType === 'INPUT' && prevEndTime !== endTime) {
-      console.log('mark://', 'INPUT Actitivity', {duration, startTime, endTime, userActivityType})
       const newQuery = {
         ...parsedQuery,
         duration,
@@ -41,7 +42,9 @@ function useLocationUpdater() {
     }
   }, [location.pathname, prevPath, duration, startTime, endTime, userActivityType, durationLabel, history, location, parsedQuery, prevEndTime]);
 
-  useEffect(() => { // In case the path changes calculate everything from new
+  // In case the URL path changes calculate everything from new
+  // After calculation update the store
+  useEffect(() => {
     if (prevPath !== location.pathname) {
       const {
         startTime: currentStartTime,

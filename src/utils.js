@@ -11,6 +11,8 @@ const calculateParams = (val) => {
   };
 }
 
+const notDefined = val => val === null || val === undefined;
+
 export const calculateDurationsFromInput = (duration) => {
   return {
     ...calculateParams(duration),
@@ -18,10 +20,8 @@ export const calculateDurationsFromInput = (duration) => {
   };
 }
 
-
-const notDefined = val => val === null || val === undefined;
 export const calculateDurationsFromUrl = (urlParams, currentDuration, currentDurationLabel) => {
-  const { duration: urlDuration, startTime: urlStartTime } = urlParams;
+  const { duration: urlDuration, startTime: urlStartTime } = (urlParams || {});
   let duration;
   let durationLabel;
   if (notDefined(urlDuration) || Number(urlDuration) === Number(currentDuration)) {
@@ -30,7 +30,7 @@ export const calculateDurationsFromUrl = (urlParams, currentDuration, currentDur
       const durationInMs = endTime - Number(urlStartTime);
       duration = durationInMs / (60000);
       durationLabel = 'CUSTOM';
-    } else { // If not possible to calculate from partial
+    } else { // If not possible to calculate from partial then take the default values
       duration = currentDuration;
       durationLabel = currentDurationLabel;
     }
