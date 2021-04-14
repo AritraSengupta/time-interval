@@ -2,7 +2,7 @@ const Label = (props) => {
   const { label, value } = props;
 
   return (
-    <div>
+    <div className={'label'}>
       <span>{label}:</span>
       <span> {value}</span>
     </div>

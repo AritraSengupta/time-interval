@@ -42,9 +42,13 @@ button:hover {
   font-size: 18px;
 }
 
+.icon-button1 {color: #4CAF50;} /* Green */
+.icon-button2 {color: #008CBA;} /* Blue */
+.icon-button3 {color: #f44336;} /* Red */
+
 .icon-button:hover {
   background: none;
-  color: #4CAF50;
+  color: #555555;
 }
 
 /* The Modal (background) */
@@ -119,4 +123,13 @@ button:hover {
 .navigation-button {
   float: right;
   margin-right: 24px; 
+}
+
+.list-holder {
+  margin: 12px;
+  padding: 12px;
+}
+
+.label {
+  margin: 12px 0px;
 }

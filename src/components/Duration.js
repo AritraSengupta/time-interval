@@ -39,8 +39,8 @@ const Duration = () => {
         <input type='number' onChange={(e) => setInputVal(e.target.value)} value={inputVal} />
       </React.Fragment>}
       {!showInput && <div style={{ display: 'inline-block' }}><Label label={label} value={display} /></div>}
-      <button className={'icon-button'} onClick={buttonClick}>{showInput ? '\u2714' : '\u2710'}</button>
-      {showInput && <button onClick={() => toggleInput(false)} className={'icon-button'}>{'\u2716'}</button>}
+      <button className={`icon-button ${showInput ? 'icon-button1' : 'icon-button2'}`} onClick={buttonClick}>{showInput ? '\u2714' : '\u2710'}</button>
+      {showInput && <button onClick={() => toggleInput(false)} className={'icon-button icon-button3'}>{'\u2716'}</button>}
     </React.Fragment>
   );
 }

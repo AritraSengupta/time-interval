@@ -7,12 +7,14 @@ const List = () => {
   const endTime = useStore(state => state.endTime);
   const durationLabel = useStore(state => state.durationLabel);
 
-  return (<div>
-    <Duration />
-    <Label label={'Duration Type'} value={durationLabel}/>
-    <Label label={'Start Time(ms)'} value={startTime} />
-    <Label label={'End Time(ms)'} value={endTime} />
-  </div>)
+  return (
+    <div className={'list-holder'}>
+      <Duration />
+      <Label label={'Duration Type'} value={durationLabel}/>
+      <Label label={'Start Time(ms)'} value={startTime} />
+      <Label label={'End Time(ms)'} value={endTime} />
+    </div>
+  );
 }
 
 export default List;
