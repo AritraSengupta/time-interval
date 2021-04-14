@@ -58,7 +58,9 @@ function useLocationUpdater() {
         endTime: currentEndTime,
         duration: currentDuration,
       };
+      // handling the default landing page
       location.pathname = location.pathname === '/' ? '/screenA' : location.pathname;
+      // write the updated values to store
       setTimes(currentDuration, currentStartTime, currentEndTime, currentDurationLabel, 'URL');
       history.push({
         ...location,

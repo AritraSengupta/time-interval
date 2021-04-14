@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
+import qs from 'qs';
 
 import { useStore } from '../store';
 import DefaultInput from './DefaultInput';
@@ -14,6 +15,9 @@ const NavigationBar = (props) => {
   const defaultDuration = useStore(state => state.duration);
   const durationLabel = useStore(state => state.durationLabel);
   const setTimes = useStore(state => state.setTimes);
+  const parsedQuery = qs.parse(location.search, {
+    ignoreQueryPrefix: true
+  });
 
   const onSave = (val) => {
     setShowModal(false);
@@ -40,12 +44,14 @@ const NavigationBar = (props) => {
           if (location.pathname === link.to) {
             currentLink = true;
           }
+          // [BONUS]: maintain custom params between page movements
+          const { startTime: noop1, endTime: noop2, duration: noop3, ...rest } = parsedQuery;
           return (
             <span key={link.to}>
               {
                 currentLink
                   ? <span className={'links'}>{link.name}</span>
-                  : <Link to={link.to} className={'links'}>{link.name}</Link>
+                  : <Link to={{ pathname: link.to, search: qs.stringify(rest) }} className={'links'}>{link.name}</Link>
               }
             </span>
             
